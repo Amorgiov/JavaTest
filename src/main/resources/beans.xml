@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+	https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="app" class="App">
+        <constructor-arg ref="sellerService"/>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/CookiesBase"/>
+        <property name="username" value="postgres"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <!-- DAO Bean -->
+    <bean id="cookieOrderService" class="services.CookieOrderService">
+        <constructor-arg ref="cookieOrderRepository" />
+    </bean>
+
+    <bean id="сookieService" class="services.CookieService">
+        <constructor-arg ref="cookieRepository" />
+    </bean>
+
+    <bean id="sellerService" class="services.SellerService">
+        <constructor-arg ref="sellerRepository" />
+    </bean>
+
+    <bean id="storeService" class="services.StoreService">
+        <constructor-arg ref="storeRepository" />
+    </bean>
+
+    <bean id="storeRepository" class="implementations.StoreRepositoryImp">
+        <constructor-arg ref="dataSource" />
+    </bean>
+
+    <bean id="cookieRepository" class="implementations.CookieRepositoryImp">
+        <constructor-arg ref="dataSource" />
+    </bean>
+
+    <bean id="sellerRepository" class="implementations.SellerRepositoryImp">
+        <constructor-arg ref="dataSource" />
+    </bean>
+
+    <bean id="cookieOrderRepository" class="implementations.CookieOrderRepositoryImp">
+        <constructor-arg ref="dataSource" />
+    </bean>
+</beans>
