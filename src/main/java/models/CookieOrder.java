@@ -12,6 +12,7 @@ public class CookieOrder {
 
     // Getters and Setters
     public int getCookieOrderId() { return cookieOrderId; }
+    public void setCookieOrderId(int cookieOrderId) { this.cookieOrderId = cookieOrderId; }
 
     public int getStoreId() {
         return store_id;

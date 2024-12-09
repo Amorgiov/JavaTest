@@ -17,6 +17,7 @@ public class Store {
 
     // Getters and Setters
     public int getStoreId() { return storeId; }
+    public void setStoreId(int storeId) { this.storeId = storeId; }
 
     public int getCookie() { return cookie; }
     private void setCookie(int cookie) { this.cookie = cookie; }

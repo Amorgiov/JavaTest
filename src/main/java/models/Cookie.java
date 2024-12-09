@@ -13,11 +13,13 @@ public class Cookie {
         return cookieId;
     }
 
+    public int getCookieId() { return cookieId; }
+    public void setCookieId(int cookieId) { this.cookieId = cookieId; }
     public String getTitle() {
         return title;
     }
 
-    private void setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 

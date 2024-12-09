@@ -43,7 +43,7 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                int storeId = rs.getInt("storeId");
+                int storeId = rs.getInt("store_id");
                 Double weight = rs.getDouble("weight");
 
                 cookieOrders.add(CookieOrder.CreateCookieOrder(storeId, weight));
@@ -66,7 +66,7 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                int storeId = resultSet.getInt("storeId");
+                int storeId = resultSet.getInt("store_id");
                 Double weight = resultSet.getDouble("weight");
 
                 cookieOrder = CookieOrder.CreateCookieOrder(storeId, weight);

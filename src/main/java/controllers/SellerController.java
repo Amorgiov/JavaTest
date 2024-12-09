@@ -17,7 +17,6 @@ public class SellerController {
 
     private final SellerService sellerService;
 
-    @Autowired
     public SellerController(SellerService sellerService) {
         this.sellerService = sellerService;
     }
@@ -27,7 +26,7 @@ public class SellerController {
     public String getAllSellers(Model model) {
         List<Seller> sellers = sellerService.getAll();
         model.addAttribute("sellers", sellers);
-        return "sellers/seller";
+        return "sellers/sellers";
     }
 
     // GET: /sellers/{id}
