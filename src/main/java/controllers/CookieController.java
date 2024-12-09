@@ -1,24 +1,17 @@
 package controllers;
 
-import models.Cookie;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import repositories.ISellerService;
-import services.CookieService;
-
-import java.util.List;
+import services.SellerService;
 
 @Controller
 @RequestMapping("/cookies")
 public class CookieController {
 
-    private final ISellerService cookieService;
+    private final SellerService cookieService;
 
-    public CookieController(ISellerService cookieService) {
+    public CookieController(SellerService cookieService) {
         this.cookieService = cookieService;
     }
 

@@ -1,15 +1,11 @@
 package services;
 
 import models.Seller;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
-import repositories.ISellerService;
 import repositories.SellerRepository;
 
 import java.util.List;
 
-public class SellerService implements ISellerService {
+public class SellerService {
     private final SellerRepository sellerRepository;
 
     public SellerService(SellerRepository sellerRepository) {
@@ -19,8 +15,8 @@ public class SellerService implements ISellerService {
         sellerRepository.insert(seller);
     }
 
-    public List<String> getAll() { return sellerRepository.getAll(); }
-    public String getById(int id) { return sellerRepository.getById(id); }
+    public List<Seller> getAll() { return sellerRepository.getAll(); }
+    public Seller getById(int id) { return sellerRepository.getById(id); }
     public void update(int id, Seller seller) { sellerRepository.update(id, seller); }
     public void delete(int id) { sellerRepository.delete(id); }
 

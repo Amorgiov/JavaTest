@@ -17,7 +17,7 @@ public class CookieOrder {
         return store_id;
     }
 
-    public void setStoreId(int store) {
+    private void setStoreId(int store) {
         this.store_id = store;
     }
 
@@ -25,7 +25,7 @@ public class CookieOrder {
         return weight;
     }
 
-    public void setWeight(Double weight) {
+    private void setWeight(Double weight) {
         this.weight = weight;
     }
 
@@ -36,5 +36,10 @@ public class CookieOrder {
         cookieOrder.setWeight(weight);
 
         return cookieOrder;
+    }
+
+    @Override
+    public String toString() {
+        return "CookieOrder { id = " + cookieOrderId + ", store_id = " + store_id + ", weight = " + weight + " }";
     }
 }

@@ -3,6 +3,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import services.SellerService;
 import models.Seller;
 
+import java.io.Console;
+import java.util.List;
+
 public class App {
 
     private final SellerService sellerService;
@@ -16,28 +19,8 @@ public class App {
 
         SellerService sellerService = context.getBean(SellerService.class);
 
-        // Создание экземпляра класса App с передачей SellerService
         App app = new App(sellerService);
 
-        // Вставка (insert) нового продавца
-        app.sellerService.insertSeller(Seller.CreateSeller("John", "Doe", "1234567890"));
-
-        /*// Получение всех продавцов
-        System.out.println("All Sellers:");
-        app.sellerService.getAll().forEach(System.out::println);
-
-        // Получение продавца по ID
-        int idToRetrieve = 8;
-        System.out.println("Seller with ID 1: " + sellerService.getById(idToRetrieve));
-        app.sellerService.getById(idToRetrieve);
-
-        // Обновление информации о продавце
-        int updatedId = 9;
-        Seller newSeller = Seller.CreateSeller("Jane", "Smith", "6543210");
-        app.sellerService.update(updatedId, newSeller);
-
-        // Удаление продавца по ID
-        int idToDelete = 7; // Предположим, что нужно удалить продавца с ID 1
-        app.sellerService.delete(idToDelete);*/
+        app.sellerService.update(14, Seller.CreateSeller("name", "surname", "2131488"));
     }
 }

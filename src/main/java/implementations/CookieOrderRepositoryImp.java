@@ -1,19 +1,14 @@
 package implementations;
 
-import database.ConfigLoader;
-import database.JDBC;
 import models.CookieOrder;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.stereotype.Repository;
 import repositories.CookieOrderRepository;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CookieOrderRepositoryImp implements CookieOrderRepository {
 
-    private static final ConfigLoader configL = new ConfigLoader();
 
     private final DriverManagerDataSource dataSource;
 
@@ -39,8 +34,8 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
     }
 
     @Override
-    public List<String> getAll() {
-        List<String> cookieOrders = new ArrayList<>();
+    public List<CookieOrder> getAll() {
+        List<CookieOrder> cookieOrders = new ArrayList<>();
         String sql = "SELECT * FROM cookie_order";
 
         try (Connection connection = dataSource.getConnection();
@@ -48,8 +43,10 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                cookieOrders.add("id:" + rs.getInt("cookie_order_id") +  "| " + rs.getString("store_id") + " "
-                        + rs.getString("weight"));
+                int storeId = rs.getInt("storeId");
+                Double weight = rs.getDouble("weight");
+
+                cookieOrders.add(CookieOrder.CreateCookieOrder(storeId, weight));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -59,8 +56,8 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
     }
 
     @Override
-    public String getById(int id) {
-        String cookieOrder = null;
+    public CookieOrder getById(int id) {
+        CookieOrder cookieOrder = null;
         String sql = "SELECT * FROM cookie_order WHERE cookie_order_id = ?";
 
         try (Connection connection = dataSource.getConnection();
@@ -69,9 +66,10 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                cookieOrder = "id:" + resultSet.getInt("cookie_order_id") + "| "
-                        + resultSet.getString("store_id") + " "
-                        + resultSet.getString("weight");
+                int storeId = resultSet.getInt("storeId");
+                Double weight = resultSet.getDouble("weight");
+
+                cookieOrder = CookieOrder.CreateCookieOrder(storeId, weight);
             }
 
         } catch (SQLException e) {

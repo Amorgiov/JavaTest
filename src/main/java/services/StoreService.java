@@ -15,8 +15,8 @@ public class StoreService {
     }
 
     public void insertStore(Store store) { storeRepository.insert(store); }
-    public List<String> getAll() { return storeRepository.getAll(); }
-    public String getById(int id) { return storeRepository.getById(id); }
+    public List<Store> getAll() { return storeRepository.getAll(); }
+    public Store getById(int id) { return storeRepository.getById(id); }
     public void update(int id, Store store) { storeRepository.update(id, store); }
     public void delete(int id) { storeRepository.delete(id); }
 }

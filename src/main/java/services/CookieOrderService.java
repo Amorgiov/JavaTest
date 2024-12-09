@@ -21,9 +21,9 @@ public class CookieOrderService {
                 CookieOrder.CreateCookieOrder(cookieOrder.getStoreId(), cookieOrder.getWeight()));
     }
 
-    public List<String> getAll() { return cookieOrderRepository.getAll(); }
+    public List<CookieOrder> getAll() { return cookieOrderRepository.getAll(); }
 
-    public String getById(int id) { return cookieOrderRepository.getById(id); }
+    public CookieOrder getById(int id) { return cookieOrderRepository.getById(id); }
 
     public void update(int id, CookieOrder cookieOrder) { cookieOrderRepository.update(id, cookieOrder); }
 

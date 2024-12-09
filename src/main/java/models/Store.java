@@ -2,6 +2,7 @@ package models;
 
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.sql.Date;
 
@@ -12,7 +13,7 @@ public class Store {
     private Double price;
     private Double weight;
     private Date date;
-    private LocalDateTime created_time;
+    private Timestamp created_time;
 
     // Getters and Setters
     public int getStoreId() { return storeId; }
@@ -32,10 +33,10 @@ public class Store {
     public Date getDate() { return date; }
     private void setDate(Date date) { this.date = date; }
 
-    public LocalDateTime getCreatedAt() { return created_time; }
-    private void setCreatedAt(LocalDateTime created_time) { this.created_time = created_time; }
+    public Timestamp getCreatedAt() { return created_time; }
+    private void setCreatedAt(Timestamp created_time) { this.created_time = created_time; }
 
-    public static Store CreateStore(int cookie, int seller, Double price, Double weight, Date date, LocalDateTime created_time){
+    public static Store CreateStore(int cookie, int seller, Double price, Double weight, Date date, Timestamp created_time){
         Store store = new Store();
 
         store.setCookie(cookie);
@@ -46,5 +47,16 @@ public class Store {
         store.setCreatedAt(created_time);
 
         return store;
+    }
+
+    @Override
+    public String toString() {
+        return "Store { storeId = " + storeId +
+                ", cookie = " + cookie +
+                ", seller = " + seller +
+                ", price = " + price +
+                ", weight = " + weight +
+                ", date = " + date +
+                ", created_time = " + created_time + " }";
     }
 }

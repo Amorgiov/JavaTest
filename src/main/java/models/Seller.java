@@ -1,7 +1,5 @@
 package models;
 
-import org.springframework.stereotype.Component;
-
 public class Seller {
     private int sellerId;
 
@@ -11,16 +9,19 @@ public class Seller {
 
     private String phone;
 
+    public Seller(){}
+
     // Getters and Setters
     public int getSellerId() {
         return sellerId;
     }
+    public void setSellerId(int id) { this.sellerId = id; }
 
     public String getName() {
         return name;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -28,7 +29,7 @@ public class Seller {
         return surname;
     }
 
-    private void setSurname(String surname) {
+    public void setSurname(String surname) {
         this.surname = surname;
     }
 
@@ -36,8 +37,17 @@ public class Seller {
         return phone;
     }
 
-    private void setPhone(String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public static Seller CreateSeller(int id, String name, String surname, String phone){
+        Seller seller = new Seller();
+        seller.setSellerId(id);
+        seller.setName(name);
+        seller.setSurname(surname);
+        seller.setPhone(phone);
+        return seller;
     }
 
     public static Seller CreateSeller(String name, String surname, String phone){
@@ -46,5 +56,13 @@ public class Seller {
         seller.setSurname(surname);
         seller.setPhone(phone);
         return seller;
+    }
+
+    @Override
+    public String toString() {
+        return "Seller { id = " + sellerId +
+                ", name = " + name +
+                ", surname = " + surname +
+                ", phone = " + phone + " }";
     }
 }

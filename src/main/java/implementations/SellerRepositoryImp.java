@@ -1,21 +1,14 @@
 package implementations;
 
-import database.ConfigLoader;
-import database.JDBC;
 import models.Seller;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.stereotype.Repository;
 import repositories.SellerRepository;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SellerRepositoryImp implements SellerRepository {
-    private static final ConfigLoader configL = new ConfigLoader();
-   /* private static Connection getConnection() throws SQLException {
-        return new JDBC(configL.getDbUrl(), configL.getDbUser(), configL.getDbPassword()).getConnection();
-    }*/
+
     private final DriverManagerDataSource dataSource;
 
     public SellerRepositoryImp(DriverManagerDataSource dataSource) {
@@ -40,18 +33,20 @@ public class SellerRepositoryImp implements SellerRepository {
     }
 
     @Override
-    public List<String> getAll() {
-        List<String> sellers = new ArrayList<>();
+    public List<Seller> getAll() {
+        List<Seller> sellers = new ArrayList<>();
         String sql = "SELECT * FROM sellers";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-                sellers.add("id:" + rs.getInt("seller_id") + "| "
-                        + rs.getString("name") + " "
-                + rs.getString("surname") + " "
-                + rs.getString("phone") + " ");
+                int id = rs.getInt("seller_id");
+                String name = rs.getString("name");
+                String surname = rs.getString("surname");
+                String phone = rs.getString("phone");
+
+                sellers.add(Seller.CreateSeller(id, name, surname, phone));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -60,8 +55,8 @@ public class SellerRepositoryImp implements SellerRepository {
     }
 
     @Override
-    public String getById(int id) {
-        String seller = null;
+    public Seller getById(int id) {
+        Seller seller = null;
         String sql = "SELECT * FROM sellers WHERE seller_id = ?";
 
         try (Connection connection = dataSource.getConnection();
@@ -70,10 +65,12 @@ public class SellerRepositoryImp implements SellerRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                seller = "id:" + resultSet.getInt("seller_id") + "| "
-                        + resultSet.getString("name") + " "
-                                             + resultSet.getString("surname") + " "
-                                             + resultSet.getString("phone");
+                int sellerId = resultSet.getInt("seller_id");
+                String name = resultSet.getString("name");
+                String surname = resultSet.getString("surname");
+                String phone = resultSet.getString("phone");
+
+                seller = Seller.CreateSeller(sellerId, name, surname, phone);
             }
 
         } catch (SQLException e) {

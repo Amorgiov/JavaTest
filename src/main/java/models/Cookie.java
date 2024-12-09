@@ -26,4 +26,9 @@ public class Cookie {
         cookie.setTitle(title);
         return cookie;
     }
+
+    @Override
+    public String toString() {
+        return "Cookie { id = " + cookieId + ", title = " + title + " }";
+    }
 }
