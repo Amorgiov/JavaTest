@@ -22,6 +22,7 @@ public class CookieController {
     @GetMapping
     public String getAllCookies(Model model) {
         List<Cookie> cookies = cookieService.getAll();
+        cookies.forEach(c -> System.out.println( c.getCookieId() + " " + c.getTitle()));
         model.addAttribute("cookies", cookies);
         return "cookies/cookies";
     }
@@ -66,7 +67,7 @@ public class CookieController {
     // POST: /cookies/{id}/edit
     @PostMapping("/{id}/edit")
     public String editCookie(@ModelAttribute("cookie") Cookie cookie) {
-        cookieService.update(cookie.getCookiesId(), Cookie.CreateCookie(cookie.getTitle()));
+        cookieService.update(cookie.getCookieId(), Cookie.CreateCookie(cookie.getTitle()));
         return "redirect:/cookies";
     }
 

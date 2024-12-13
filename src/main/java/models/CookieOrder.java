@@ -6,31 +6,40 @@ import org.springframework.stereotype.Component;
 public class CookieOrder {
     private int cookieOrderId;
 
-    private int store_id;
+    private int storeId;
 
-    private Double weight;
+    private int weight;
 
     // Getters and Setters
     public int getCookieOrderId() { return cookieOrderId; }
     public void setCookieOrderId(int cookieOrderId) { this.cookieOrderId = cookieOrderId; }
 
     public int getStoreId() {
-        return store_id;
+        return storeId;
     }
 
-    private void setStoreId(int store) {
-        this.store_id = store;
+    public void setStoreId(int store) {
+        this.storeId = store;
     }
 
-    public Double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    private void setWeight(Double weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public static CookieOrder CreateCookieOrder (int store_id, Double weight) {
+    public static CookieOrder CreateCookieOrder (int cookieOrderId, int store_id, int weight) {
+        CookieOrder cookieOrder = new CookieOrder();
+
+        cookieOrder.setCookieOrderId(cookieOrderId);
+        cookieOrder.setStoreId(store_id);
+        cookieOrder.setWeight(weight);
+
+        return cookieOrder;
+    }
+    public static CookieOrder CreateCookieOrder (int store_id, int weight) {
         CookieOrder cookieOrder = new CookieOrder();
 
         cookieOrder.setStoreId(store_id);
@@ -41,6 +50,6 @@ public class CookieOrder {
 
     @Override
     public String toString() {
-        return "CookieOrder { id = " + cookieOrderId + ", store_id = " + store_id + ", weight = " + weight + " }";
+        return "CookieOrder { id = " + cookieOrderId + ", store_id = " + storeId + ", weight = " + weight + " }";
     }
 }

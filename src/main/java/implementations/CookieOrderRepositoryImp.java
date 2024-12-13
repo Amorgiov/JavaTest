@@ -24,7 +24,7 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setInt(1, cookieOrder.getStoreId());
-            preparedStatement.setDouble(2, cookieOrder.getWeight());
+            preparedStatement.setInt(2, cookieOrder.getWeight());
 
             preparedStatement.executeUpdate();
 
@@ -43,10 +43,11 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
+                int cookieOrderId = rs.getInt("cookie_order_id");
                 int storeId = rs.getInt("store_id");
-                Double weight = rs.getDouble("weight");
+                int weight = rs.getInt("weight");
 
-                cookieOrders.add(CookieOrder.CreateCookieOrder(storeId, weight));
+                cookieOrders.add(CookieOrder.CreateCookieOrder(cookieOrderId, storeId, weight));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -66,10 +67,11 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
+                int cookieOrderId = resultSet.getInt("cookie_order_id");
                 int storeId = resultSet.getInt("store_id");
-                Double weight = resultSet.getDouble("weight");
+                int weight = resultSet.getInt("weight");
 
-                cookieOrder = CookieOrder.CreateCookieOrder(storeId, weight);
+                cookieOrder = CookieOrder.CreateCookieOrder(cookieOrderId, storeId, weight);
             }
 
         } catch (SQLException e) {
@@ -86,7 +88,7 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, cookieOrder.getStoreId());
-            pstmt.setDouble(2, cookieOrder.getWeight());
+            pstmt.setInt(2, cookieOrder.getWeight());
             pstmt.setInt(3, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {

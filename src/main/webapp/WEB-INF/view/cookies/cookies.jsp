@@ -23,15 +23,15 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="cookie" items="${cookies}">
+            <c:forEach var="coo" items="${cookies}">
                 <tr>
-                    <td><c:out value="${cookie.cookiesId}" /></td>
-                    <td><c:out value="${cookie.title}" /></td>
+                    <td><c:out value="${coo.cookieId}" /></td>
+                    <td><c:out value="${coo.title}" /></td>
                     <td>
-                        <a href="<c:url value='/cookies/${cookie.cookiesId}/edit' />">
+                        <a href="<c:url value='/cookies/${coo.cookieId}/edit' />">
                             <button type="button">Edit</button>
                         </a>
-                        <a href="<c:url value='/cookies/${cookie.cookiesId}/delete' />" onclick="return confirm('Are you sure you want to delete this cookie?');">
+                        <a href="<c:url value='/cookies/${coo.cookieId}/delete' />" onclick="return confirm('Are you sure you want to delete this cookie?');">
                             <button type="button" style="color: red;">Delete</button>
                         </a>
                     </td>

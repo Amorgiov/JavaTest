@@ -13,7 +13,7 @@
         <input type="hidden" id="cookieOrderId" name="cookieOrderId" value="${cookieOrder.cookieOrderId}" required>
 
         <label for="storeId">Store ID:</label>
-        <input type="number" id="store_id" name="store_id" value="${cookieOrder.store_id}" required>
+        <input type="number" id="storeId" name="storeId" value="${cookieOrder.storeId}" required>
         <br><br>
 
         <label for="weight">Weight:</label>

@@ -10,8 +10,8 @@ public class Store {
     private int storeId;
     private int cookie;
     private int seller;
-    private Double price;
-    private Double weight;
+    private int price;
+    private int weight;
     private Date date;
     private Timestamp created_time;
 
@@ -20,26 +20,39 @@ public class Store {
     public void setStoreId(int storeId) { this.storeId = storeId; }
 
     public int getCookie() { return cookie; }
-    private void setCookie(int cookie) { this.cookie = cookie; }
+    public void setCookie(int cookie) { this.cookie = cookie; }
 
     public int getSeller() { return seller; }
-    private void setSeller(int seller) { this.seller = seller; }
+    public void setSeller(int seller) { this.seller = seller; }
 
-    public Double getPrice() { return price; }
-    private void setPrice(Double price) { this.price = price; }
+    public int getPrice() { return price; }
+    public void setPrice(int price) { this.price = price; }
 
-    public Double getWeight() { return weight; }
-    private void setWeight(Double weight) { this.weight = weight; }
+    public int getWeight() { return weight; }
+    public void setWeight(int weight) { this.weight = weight; }
 
     public Date getDate() { return date; }
-    private void setDate(Date date) { this.date = date; }
+    public void setDate(Date date) { this.date = date; }
 
     public Timestamp getCreatedAt() { return created_time; }
-    private void setCreatedAt(Timestamp created_time) { this.created_time = created_time; }
+    public void setCreatedAt(Timestamp created_time) { this.created_time = created_time; }
 
-    public static Store CreateStore(int cookie, int seller, Double price, Double weight, Date date, Timestamp created_time){
+    public static Store CreateStore(int storeId, int cookie, int seller, int price, int weight, Date date, Timestamp created_time){
         Store store = new Store();
 
+        store.setStoreId(storeId);
+        store.setCookie(cookie);
+        store.setSeller(seller);
+        store.setPrice(price);
+        store.setWeight(weight);
+        store.setDate(date);
+        store.setCreatedAt(created_time);
+
+        return store;
+    }
+
+    public static Store CreateStore(int cookie, int seller, int price, int weight, Date date, Timestamp created_time){
+        Store store = new Store();
         store.setCookie(cookie);
         store.setSeller(seller);
         store.setPrice(price);

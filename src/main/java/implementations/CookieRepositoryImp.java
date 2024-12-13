@@ -22,9 +22,8 @@ public class CookieRepositoryImp implements CookieInterface {
     @Override
     public void insert(Cookie cookie) {
         String sql = "INSERT INTO cookies (title) VALUES (?)";
-        ResultSet generatedKeys = null;
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, cookie.getTitle());
 
@@ -37,14 +36,15 @@ public class CookieRepositoryImp implements CookieInterface {
     @Override
     public List<Cookie> getAll() {
         List<Cookie> cookies = new ArrayList<>();
-        String sql = "SELECT * FROM cookies";
+        String sql = "SELECT * FROM public.cookies";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
+                int cookieId = rs.getInt("cookie_id");
                 String title = rs.getString("title");
-                cookies.add(Cookie.CreateCookie(title));
+                cookies.add(Cookie.CreateCookie(cookieId, title));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -64,8 +64,9 @@ public class CookieRepositoryImp implements CookieInterface {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
+                int cookieId = resultSet.getInt("cookie_id");
                 String title = resultSet.getString("title");
-                cookie = Cookie.CreateCookie(title);
+                cookie = Cookie.CreateCookie(cookieId, title);
             }
 
         } catch (SQLException e) {

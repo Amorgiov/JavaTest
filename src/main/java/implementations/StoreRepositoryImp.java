@@ -24,8 +24,8 @@ public class StoreRepositoryImp implements StoreInterface {
 
             preparedStatement.setInt(1, store.getCookie());
             preparedStatement.setInt(2, store.getSeller());
-            preparedStatement.setDouble(3, store.getPrice());
-            preparedStatement.setDouble(4, store.getWeight());
+            preparedStatement.setInt(3, store.getPrice());
+            preparedStatement.setInt(4, store.getWeight());
             preparedStatement.setDate(5, store.getDate());
             preparedStatement.setTimestamp(6, store.getCreatedAt());
 
@@ -45,15 +45,15 @@ public class StoreRepositoryImp implements StoreInterface {
              ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
-
+                int storeId = rs.getInt("store_id");
                 int cookieId = rs.getInt("cookie_id");
                 int sellerId = rs.getInt("seller_id");
-                Double price = rs.getDouble("price");
-                Double weight = rs.getDouble("weight");
+                int price = rs.getInt("price");
+                int weight = rs.getInt("weight");
                 Date date = rs.getDate("date");
                 Timestamp timestamp = rs.getTimestamp("created_time");
 
-                store.add(Store.CreateStore(cookieId, sellerId, price, weight, date, timestamp));
+                store.add(Store.CreateStore(storeId, cookieId, sellerId, price, weight, date, timestamp));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -70,15 +70,18 @@ public class StoreRepositoryImp implements StoreInterface {
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()){
+                int storeId = rs.getInt("store_id");
+                int cookieId = rs.getInt("cookie_id");
+                int sellerId = rs.getInt("seller_id");
+                int price = rs.getInt("price");
+                int weight = rs.getInt("weight");
+                Date date = rs.getDate("date");
+                Timestamp timestamp = rs.getTimestamp("created_time");
 
-            int cookieId = rs.getInt("cookie_id");
-            int sellerId = rs.getInt("seller_id");
-            Double price = rs.getDouble("price");
-            Double weight = rs.getDouble("weight");
-            Date date = rs.getDate("date");
-            Timestamp timestamp = rs.getTimestamp("created_time");
+                store = Store.CreateStore(storeId, cookieId, sellerId, price, weight, date, timestamp);
+            }
 
-            store = Store.CreateStore(cookieId, sellerId, price, weight, date, timestamp);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,8 +97,8 @@ public class StoreRepositoryImp implements StoreInterface {
 
             pstmt.setInt(1, store.getCookie());
             pstmt.setInt(2, store.getSeller());
-            pstmt.setDouble(3, store.getPrice());
-            pstmt.setDouble(4, store.getWeight());
+            pstmt.setInt(3, store.getPrice());
+            pstmt.setInt(4, store.getWeight());
             pstmt.setDate(5, new java.sql.Date(store.getDate().getTime()));
             pstmt.setTimestamp(6, store.getCreatedAt());
             pstmt.setInt(7, id);

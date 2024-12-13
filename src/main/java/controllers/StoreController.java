@@ -1,3 +1,4 @@
+
 package controllers;
 
 import models.Store;
@@ -20,7 +21,6 @@ public class StoreController {
         this.storeService = storeService;
     }
 
-    // GET: /stores/
     @GetMapping
     public String getAllStores(Model model) {
         List<Store> stores = storeService.getAll();
@@ -28,7 +28,6 @@ public class StoreController {
         return "stores/stores";
     }
 
-    // GET: /stores/{id}
     @GetMapping("/{id}")
     public String getStoreById(@PathVariable("id") int id, Model model) {
         Store store = storeService.getById(id);
@@ -40,39 +39,30 @@ public class StoreController {
         return "stores/detail";
     }
 
-    // GET: /stores/create
     @GetMapping("/create")
     public String createStoreForm() {
         return "stores/create";
     }
 
-    // POST: /stores/create
     @PostMapping("/create")
     public String createStore(@ModelAttribute("store") Store store) {
-        storeService.insertStore(Store.CreateStore(store.getCookie(), store.getSeller(), store.getPrice(), store.getWeight(), store.getDate(), new Timestamp(System.currentTimeMillis())));
+        storeService.insertStore(Store.CreateStore(store.getStoreId(), store.getCookie(), store.getSeller(), store.getPrice(), store.getWeight(), store.getDate(), new Timestamp(System.currentTimeMillis())));
         return "redirect:/stores";
     }
 
-    // GET: /stores/{id}/edit
     @GetMapping("/{id}/edit")
     public String editStoreForm(@PathVariable("id") int id, Model model) {
         Store store = storeService.getById(id);
-        if (store == null) {
-            model.addAttribute("error", "Store not found");
-            return "error";
-        }
         model.addAttribute("store", store);
         return "stores/edit";
     }
 
-    // POST: /stores/{id}/edit
     @PostMapping("/{id}/edit")
     public String editStore(@ModelAttribute("store") Store store) {
         storeService.update(store.getStoreId(), Store.CreateStore(store.getCookie(), store.getSeller(), store.getPrice(), store.getWeight(), store.getDate(), new Timestamp(System.currentTimeMillis())));
         return "redirect:/stores";
     }
 
-    // GET: /stores/{id}/delete
     @GetMapping("/{id}/delete")
     public String deleteStore(@PathVariable("id") int id) {
         storeService.delete(id);

@@ -1,3 +1,4 @@
+
 package controllers;
 
 import models.CookieOrder;
@@ -18,7 +19,6 @@ public class OrderController {
         this.cookieOrderService = cookieOrderService;
     }
 
-    // GET: /cookie-orders/
     @GetMapping
     public String getAllCookieOrders(Model model) {
         List<CookieOrder> cookieOrders = cookieOrderService.getAll();
@@ -26,7 +26,6 @@ public class OrderController {
         return "cookie-orders/cookieOrders";
     }
 
-    // GET: /cookie-orders/{id}
     @GetMapping("/{id}")
     public String getCookieOrderById(@PathVariable("id") int id, Model model) {
         CookieOrder cookieOrder = cookieOrderService.getById(id);
@@ -38,20 +37,21 @@ public class OrderController {
         return "cookie-orders/detail";
     }
 
-    // GET: /cookie-orders/create
     @GetMapping("/create")
     public String createCookieOrderForm() {
+
+        System.out.println("Create!!!!!!!!!!");
+
         return "cookie-orders/create";
     }
 
-    // POST: /cookie-orders/create
     @PostMapping("/create")
     public String createCookieOrder(@ModelAttribute("cookieOrder") CookieOrder cookieOrder) {
+        System.out.println("Create!!!!!!!!!!" + cookieOrder.getWeight() + " " + cookieOrder.getStoreId() + " " + cookieOrder.getCookieOrderId());
         cookieOrderService.insertCookieOrder(CookieOrder.CreateCookieOrder(cookieOrder.getStoreId(), cookieOrder.getWeight()));
         return "redirect:/cookie-orders";
     }
 
-    // GET: /cookie-orders/{id}/edit
     @GetMapping("/{id}/edit")
     public String editCookieOrderForm(@PathVariable("id") int id, Model model) {
         CookieOrder cookieOrder = cookieOrderService.getById(id);
@@ -63,14 +63,12 @@ public class OrderController {
         return "cookie-orders/edit";
     }
 
-    // POST: /cookie-orders/{id}/edit
     @PostMapping("/{id}/edit")
     public String editCookieOrder(@ModelAttribute("cookieOrder") CookieOrder cookieOrder) {
         cookieOrderService.update(cookieOrder.getCookieOrderId(), CookieOrder.CreateCookieOrder(cookieOrder.getStoreId(), cookieOrder.getWeight()));
         return "redirect:/cookie-orders";
     }
 
-    // GET: /cookie-orders/{id}/delete
     @GetMapping("/{id}/delete")
     public String deleteCookieOrder(@PathVariable("id") int id) {
         cookieOrderService.delete(id);

@@ -7,11 +7,9 @@
     <packaging>war</packaging>
     <groupId>org.example</groupId>
     <artifactId>Cookies</artifactId>
-    <version>Cookies-1.0-SNAPSHOT</version>
+    <version>JavaTest</version>
 
     <properties>
-
-
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -72,6 +70,7 @@
     </dependencies>
 
     <build>
+        <finalName>${version}</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -87,7 +86,6 @@
                     </configuration>
                 </plugin>
             </plugins>
-
         </pluginManagement>
     </build>
 </project>

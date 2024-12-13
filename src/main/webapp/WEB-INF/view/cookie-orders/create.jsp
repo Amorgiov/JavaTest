@@ -11,7 +11,7 @@
 
     <form action="/JavaTest/cookie-orders/create" method="POST">
         <label for="store_id">Store ID:</label>
-        <input type="number" id="store_id" name="store_id" required>
+        <input type="number" id="storeId" name="storeId" required>
         <br><br>
 
         <label for="weight">Weight:</label>
