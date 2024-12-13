@@ -1,35 +1,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page contentType="text/html; charset=UTF-8" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
 
-<html>
-    <head>
-        <title>Печеньковый_путеводитель</title>
-    </head>
-    <body>
-        <h1>Добро пожаловать путник, выбирай с умом куда дальше путь держать будешь:</h1>
-        <h3>
-            <p>
-                К <a href="<c:url value='/cookies' />">Cookies</a> потопаешь — печеньками тебя так затрамбуют, что и рта не открыть!
-                <span style="font-size: 20px;"⇛</span>
-            </p>
-        </h3>
-        <h3>
-            <p>
-                К <a href="<c:url value='/cookie-orders' />">CookieOrder</a> завернёшь — подписывать приказы да накладные будешь до посинения, а вместо чернил — варенье липкое!
-                <span style="font-size: 20px;"⇛</span>
-            </p>
-        </h3>
-        <h3>
-            <p>
-                К <a href="<c:url value='/sellers' />">Seller</a> вломишься — хитрый торгаш сдерёт с тебя три шкуры и заставит купить три тонны просроченных пряников!
-                <span style="font-size: 20px;"⇛</span>
-            </p>
-        </h3>
-        <h3>
-            <p>
-                А в <a href="<c:url value='/stores' />">Store</a> сунешься — сторож этот, дубиной размахивая, башку тебе так протрясёт, что из ушей крошки полетят!
-                <span style="font-size: 20px;"⇛</span>
-            </p>
-        </h3>
-    </body>
+    <p><a href="<c:url value='/cookies' />">Cookies</a></p>
+    <p><a href="<c:url value='/cookie-orders' />">Cookie Orders</a></p>
+    <p><a href="<c:url value='/sellers' />">Sellers</a></p>
+    <p><a href="<c:url value='/stores' />">Stores</a></p>
+</body>
 </html>

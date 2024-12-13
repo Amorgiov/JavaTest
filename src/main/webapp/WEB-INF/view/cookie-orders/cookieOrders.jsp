@@ -34,12 +34,18 @@
                             <button type="button">Edit</button>
                         </a>
                         <a href="<c:url value='/cookie-orders/${cookieOrder.cookieOrderId}/delete' />" onclick="return confirm('Are you sure you want to delete this order?');">
-                            <button type="button" style="color: red;">Delete</button>
+                            <button type="button">Delete</button>
                         </a>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
+
+    <p>
+        <a href="<c:url value='/' />">
+            <button type="button">Go to Cookie Guide</button>
+        </a>
+    </p>
 </body>
 </html>

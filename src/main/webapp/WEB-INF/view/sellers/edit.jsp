@@ -1,4 +1,6 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +11,7 @@
 <body>
     <h1>Edit Seller</h1>
 
+    <!-- Форма для редактирования продавца -->
     <form action="<c:url value='/sellers/${seller.sellerId}/edit' />" method="POST">
         <input type="hidden" id="sellerId" name="sellerId" value="${seller.sellerId}" required>
 

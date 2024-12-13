@@ -55,7 +55,7 @@ public class CookieRepositoryImp implements CookieInterface {
     @Override
     public Cookie getById(int id) {
         Cookie cookie = null;
-        String sql = "SELECT * FROM cookies WHERE cookie_id = ?";
+        String sql = "SELECT * FROM public.cookies WHERE cookie_id = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {

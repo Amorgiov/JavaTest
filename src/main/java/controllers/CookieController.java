@@ -55,19 +55,19 @@ public class CookieController {
     // GET: /cookies/{id}/edit
     @GetMapping("/{id}/edit")
     public String editCookieForm(@PathVariable("id") int id, Model model) {
-        Cookie cookie = cookieService.getById(id);
-        if (cookie == null) {
+        Cookie cookieItem = cookieService.getById(id);
+        if (cookieItem == null) {
             model.addAttribute("error", "Cookie not found");
             return "error";
         }
-        model.addAttribute("cookie", cookie);
+        model.addAttribute("cookieItem", cookieItem);
         return "cookies/edit";
     }
 
     // POST: /cookies/{id}/edit
     @PostMapping("/{id}/edit")
-    public String editCookie(@ModelAttribute("cookie") Cookie cookie) {
-        cookieService.update(cookie.getCookieId(), Cookie.CreateCookie(cookie.getTitle()));
+    public String editCookie(@ModelAttribute("cookieItem") Cookie cookieItem) {
+        cookieService.update(cookieItem.getCookieId(), Cookie.CreateCookie(cookieItem.getTitle()));
         return "redirect:/cookies";
     }
 

@@ -7,12 +7,23 @@
     <title>Cookie List</title>
 </head>
 <body>
-    <h1>Cookie List</h1>
 
-    <a href="<c:url value='/cookies/create' />">
-        <button type="button">Add New Cookie</button>
-    </a>
-    <br><br>
+    <h1>Cookie Management</h1>
+
+    <nav>
+        <a href="<c:url value='/cookies' />">Cookies</a> |
+        <a href="<c:url value='/sellers' />">Sellers</a> |
+        <a href="<c:url value='/cookie-orders' />">Cookie Orders</a> |
+        <a href="<c:url value='/stores' />">Stores</a>
+    </nav>
+
+    <h2>Cookie List</h2>
+
+    <p>
+        <a href="<c:url value='/cookies/create' />">
+            <button type="button">Add New Cookie</button>
+        </a>
+    </p>
 
     <table border="1">
         <thead>
@@ -32,12 +43,19 @@
                             <button type="button">Edit</button>
                         </a>
                         <a href="<c:url value='/cookies/${coo.cookieId}/delete' />" onclick="return confirm('Are you sure you want to delete this cookie?');">
-                            <button type="button" style="color: red;">Delete</button>
+                            <button type="button">Delete</button>
                         </a>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
+
+    <p>
+        <a href="<c:url value='/' />">
+            <button type="button">Go to Cookie Guide</button>
+        </a>
+    </p>
+
 </body>
 </html>

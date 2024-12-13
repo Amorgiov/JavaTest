@@ -9,18 +9,15 @@
 <body>
     <h1>Seller List</h1>
 
-    <!-- Сообщение об успешном добавлении, обновлении или удалении -->
     <c:if test="${not empty message}">
-        <p style="color: green;"><c:out value="${message}" /></p>
+        <p><c:out value="${message}" /></p>
     </c:if>
 
-    <!-- Кнопка для добавления нового продавца -->
     <a href="<c:url value='/sellers/create' />">
         <button type="button">Add New Seller</button>
     </a>
-    <br>
+    <br><br>
 
-    <!-- Таблица с продавцами -->
     <table border="1">
         <thead>
             <tr>
@@ -39,19 +36,22 @@
                     <td><c:out value="${seller.surname}" /></td>
                     <td><c:out value="${seller.phone}" /></td>
                     <td>
-                        <!-- Кнопка Изменить -->
                         <a href="<c:url value='/sellers/${seller.sellerId}/edit' />">
                             <button type="button">Edit</button>
                         </a>
-
-                        <!-- Кнопка Удалить -->
                         <a href="<c:url value='/sellers/${seller.sellerId}/delete' />" onclick="return confirm('Are you sure you want to delete this seller?');">
-                            <button type="button" style="color: red;">Delete</button>
+                            <button type="button">Delete</button>
                         </a>
                     </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
+
+    <p>
+        <a href="<c:url value='/' />">
+            <button type="button">Go to Cookie Guide</button>
+        </a>
+    </p>
 </body>
 </html>

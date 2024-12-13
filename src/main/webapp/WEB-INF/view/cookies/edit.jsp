@@ -9,11 +9,11 @@
 <body>
     <h1>Edit Cookie</h1>
 
-    <form action="<c:url value='/cookies/${cookie.cookiesId}/edit' />" method="POST">
-        <input type="hidden" id="cookieId" name="cookieId" value="${cookie.cookiesId}" required>
+    <form action="<c:url value='/cookies/${cookieItem.cookieId}/edit' />" method="POST">
+        <input type="hidden" id="cookieId" name="cookieId" value="${cookieItem.cookieId}" required>
 
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" value="${cookie.title}" required>
+        <input type="text" id="title" name="title" value="${cookieItem.title}" required>
         <br><br>
 
         <button type="submit">Update Cookie</button>
