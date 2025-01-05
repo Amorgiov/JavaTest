@@ -1,11 +1,14 @@
 package models;
 
-import org.springframework.stereotype.Component;
-
+import lombok.Data;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class Cookie {
     private int cookieId;
 
+    @NotBlank(message = "Title cannot be null")
+    @Size(min = 3, max = 25, message = "The title should be between 3 and 25 characters")
     private String title;
 
     // Getters and Setters

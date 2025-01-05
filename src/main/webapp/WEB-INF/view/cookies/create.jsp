@@ -1,20 +1,29 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Cookie</title>
+    <style>
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Create New Cookie</h1>
+    <h1>Create a New Cookie</h1>
+    <form:form method="post" action="${pageContext.request.contextPath}/cookies/create" modelAttribute="cookie">
+        <div class="form-group">
+            <form:label path="title">Title:</form:label>
+            <form:input path="title" class="form-control"/>
+            <form:errors path="title" cssClass="error"/>
+        </div>
+        <br>
+        <button type="submit">Create</button>
 
-    <form action="/JavaTest/cookies/create" method="POST">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
-        <br><br>
-
-        <button type="submit">Create Cookie</button>
-    </form>
+    </form:form>
+    <br>
+    <a href="JavaTest/cookies">Back to List</a>
 </body>
 </html>

@@ -1,7 +1,9 @@
 package controllers;
 
+import jakarta.validation.Valid;
 import models.Cookie;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import services.CookieService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,14 +43,21 @@ public class CookieController {
 
     // GET: /cookies/create
     @GetMapping("/create")
-    public String createCookieForm() {
+    public String createCookieForm(Model model) {
+        model.addAttribute(new Cookie());
         return "cookies/create";
     }
 
     // POST: /cookies/create
     @PostMapping("/create")
-    public String createCookie(@ModelAttribute("cookie") Cookie cookie) {
+    public String createCookie(@Valid @ModelAttribute("cookie") Cookie cookie, BindingResult result) {
+        if (result.hasErrors()) {
+            System.out.println(result.hasErrors() + " " + result);
+            return "cookies/create"; // возвращаем форму с ошибками
+        }
+
         cookieService.insertCookie(Cookie.CreateCookie(cookie.getTitle()));
+
         return "redirect:/cookies";
     }
 
@@ -66,7 +75,10 @@ public class CookieController {
 
     // POST: /cookies/{id}/edit
     @PostMapping("/{id}/edit")
-    public String editCookie(@ModelAttribute("cookieItem") Cookie cookieItem) {
+    public String editCookie(@Valid @ModelAttribute("cookieItem") Cookie cookieItem, BindingResult result) {
+        if (result.hasErrors()) {
+            return "cookies/edit";  // возвращаем форму с ошибками
+        }
         cookieService.update(cookieItem.getCookieId(), Cookie.CreateCookie(cookieItem.getTitle()));
         return "redirect:/cookies";
     }
