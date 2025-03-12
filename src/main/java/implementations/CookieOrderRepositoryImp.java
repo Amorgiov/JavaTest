@@ -9,7 +9,6 @@ import java.util.List;
 
 public class CookieOrderRepositoryImp implements CookieOrderRepository {
 
-
     private final DriverManagerDataSource dataSource;
 
     public CookieOrderRepositoryImp(DriverManagerDataSource dataSource) {
@@ -18,10 +17,10 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
 
     @Override
     public void insert(CookieOrder cookieOrder) {
-        String sql = "INSERT INTO cookie_order (store_id, weight) VALUES (?, ?)";
+        String sql = "INSERT INTO cookie_orders (store_id, weight) VALUES (?, ?)";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setInt(1, cookieOrder.getStoreId());
             preparedStatement.setInt(2, cookieOrder.getWeight());
@@ -36,11 +35,11 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
     @Override
     public List<CookieOrder> getAll() {
         List<CookieOrder> cookieOrders = new ArrayList<>();
-        String sql = "SELECT * FROM cookie_order";
+        String sql = "SELECT * FROM cookie_orders";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+                PreparedStatement pstmt = connection.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
                 int cookieOrderId = rs.getInt("cookie_order_id");
@@ -59,10 +58,10 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
     @Override
     public CookieOrder getById(int id) {
         CookieOrder cookieOrder = null;
-        String sql = "SELECT * FROM cookie_order WHERE cookie_order_id = ?";
+        String sql = "SELECT * FROM cookie_orders WHERE cookie_order_id = ?";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -83,10 +82,10 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
 
     @Override
     public void update(int id, CookieOrder cookieOrder) {
-        String sql = "UPDATE cookie_order SET store_id = ?, weight = ? WHERE cookie_order_id = ?";
+        String sql = "UPDATE cookie_orders SET store_id = ?, weight = ? WHERE cookie_order_id = ?";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, cookieOrder.getStoreId());
             pstmt.setInt(2, cookieOrder.getWeight());
             pstmt.setInt(3, id);
@@ -98,10 +97,10 @@ public class CookieOrderRepositoryImp implements CookieOrderRepository {
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM cookie_order WHERE cookie_order_id = ?";
+        String sql = "DELETE FROM cookie_orders WHERE cookie_order_id = ?";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
         } catch (SQLException e) {

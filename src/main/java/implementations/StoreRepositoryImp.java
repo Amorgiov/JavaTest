@@ -20,7 +20,7 @@ public class StoreRepositoryImp implements StoreInterface {
         String sql = "INSERT INTO store (cookie_id, seller_id, price, weight, date, created_time) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setInt(1, store.getCookie());
             preparedStatement.setInt(2, store.getSeller());
@@ -41,8 +41,8 @@ public class StoreRepositoryImp implements StoreInterface {
         List<Store> store = new ArrayList<>();
         String sql = "SELECT * FROM store";
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+                PreparedStatement pstmt = connection.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
                 int storeId = rs.getInt("store_id");
@@ -67,10 +67,10 @@ public class StoreRepositoryImp implements StoreInterface {
         String sql = "SELECT * FROM store WHERE store_id = ?";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 int storeId = rs.getInt("store_id");
                 int cookieId = rs.getInt("cookie_id");
                 int sellerId = rs.getInt("seller_id");
@@ -93,7 +93,7 @@ public class StoreRepositoryImp implements StoreInterface {
         String sql = "UPDATE store SET cookie_id = ?, seller_id = ?, price = ?, weight = ?, date = ?, created_time = ? WHERE store_id = ?";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setInt(1, store.getCookie());
             pstmt.setInt(2, store.getSeller());
@@ -114,7 +114,7 @@ public class StoreRepositoryImp implements StoreInterface {
         String sql = "DELETE FROM store WHERE store_id = ?";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();

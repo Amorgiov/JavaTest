@@ -26,29 +26,16 @@ public class OrderController {
         return "cookie-orders/cookieOrders";
     }
 
-    @GetMapping("/{id}")
-    public String getCookieOrderById(@PathVariable("id") int id, Model model) {
-        CookieOrder cookieOrder = cookieOrderService.getById(id);
-        if (cookieOrder == null) {
-            model.addAttribute("error", "Cookie order not found");
-            return "error";
-        }
-        model.addAttribute("cookieOrder", cookieOrder);
-        return "cookie-orders/detail";
-    }
-
     @GetMapping("/create")
     public String createCookieOrderForm() {
-
-        System.out.println("Create!!!!!!!!!!");
-
         return "cookie-orders/create";
     }
 
     @PostMapping("/create")
     public String createCookieOrder(@ModelAttribute("cookieOrder") CookieOrder cookieOrder) {
-        System.out.println("Create!!!!!!!!!!" + cookieOrder.getWeight() + " " + cookieOrder.getStoreId() + " " + cookieOrder.getCookieOrderId());
-        cookieOrderService.insertCookieOrder(CookieOrder.CreateCookieOrder(cookieOrder.getStoreId(), cookieOrder.getWeight()));
+        cookieOrderService
+                .insertCookieOrder(CookieOrder.CreateCookieOrder(cookieOrder.getStoreId(), cookieOrder.getWeight()));
+
         return "redirect:/cookie-orders";
     }
 
@@ -65,7 +52,8 @@ public class OrderController {
 
     @PostMapping("/{id}/edit")
     public String editCookieOrder(@ModelAttribute("cookieOrder") CookieOrder cookieOrder) {
-        cookieOrderService.update(cookieOrder.getCookieOrderId(), CookieOrder.CreateCookieOrder(cookieOrder.getStoreId(), cookieOrder.getWeight()));
+        cookieOrderService.update(cookieOrder.getCookieOrderId(),
+                CookieOrder.CreateCookieOrder(cookieOrder.getStoreId(), cookieOrder.getWeight()));
         return "redirect:/cookie-orders";
     }
 

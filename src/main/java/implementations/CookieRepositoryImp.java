@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class CookieRepositoryImp implements CookieInterface {
 
     private final DriverManagerDataSource dataSource;
@@ -23,7 +22,7 @@ public class CookieRepositoryImp implements CookieInterface {
     public void insert(Cookie cookie) {
         String sql = "INSERT INTO cookies (title) VALUES (?)";
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, cookie.getTitle());
 
@@ -36,10 +35,10 @@ public class CookieRepositoryImp implements CookieInterface {
     @Override
     public List<Cookie> getAll() {
         List<Cookie> cookies = new ArrayList<>();
-        String sql = "SELECT * FROM public.cookies";
+        String sql = "SELECT * FROM cookies";
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+                PreparedStatement pstmt = connection.prepareStatement(sql);
+                ResultSet rs = pstmt.executeQuery()) {
 
             while (rs.next()) {
                 int cookieId = rs.getInt("cookie_id");
@@ -58,7 +57,7 @@ public class CookieRepositoryImp implements CookieInterface {
         String sql = "SELECT * FROM public.cookies WHERE cookie_id = ?";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -79,7 +78,7 @@ public class CookieRepositoryImp implements CookieInterface {
     public void update(int id, Cookie cookie) {
         String sql = "UPDATE cookies SET title = ? WHERE cookie_id = ?";
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
             pstmt.setString(1, cookie.getTitle());
 
@@ -95,7 +94,7 @@ public class CookieRepositoryImp implements CookieInterface {
         String sql = "DELETE FROM cookies WHERE cookie_id = ?";
 
         try (Connection connection = dataSource.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();

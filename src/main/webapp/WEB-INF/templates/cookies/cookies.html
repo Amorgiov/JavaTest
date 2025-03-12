@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookie List</title>
+  </head>
+  <body>
+    <h1>Cookie Management</h1>
+
+    <nav>
+      <a th:href="@{/cookies}">Cookies</a> |
+      <a th:href="@{/sellers}">Sellers</a> |
+      <a th:href="@{/cookie-orders}">Cookie Orders</a> |
+      <a th:href="@{/stores}">Stores</a>
+    </nav>
+
+    <h2>Cookie List</h2>
+
+    <p>
+      <a th:href="@{/cookies/create}">
+        <button type="button">Add New Cookie</button>
+      </a>
+    </p>
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="cookie : ${cookies}">
+          <td th:text="${cookie.cookieId}"></td>
+          <td th:text="${cookie.title}"></td>
+          <td>
+            <a th:href="@{/cookies/{id}/edit(id=${cookie.cookieId})}">
+              <button type="button">Edit</button>
+            </a>
+            <a
+              th:href="@{/cookies/{id}/delete(id=${cookie.cookieId})}"
+              onclick="return confirm('Are you sure you want to delete this cookie?');"
+            >
+              <button type="button">Delete</button>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+      <tr th:if="${#lists.isEmpty(cookies)}">
+        <td colspan="3">No cookies available.</td>
+      </tr>
+    </table>
+
+    <p>
+      <a th:href="@{/}">
+        <button type="button">Go to Cookie Guide</button>
+      </a>
+    </p>
+  </body>
+</html>

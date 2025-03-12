@@ -1,9 +1,6 @@
 package models;
 
-import org.springframework.stereotype.Component;
-
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.sql.Date;
 
 public class Store {
@@ -16,28 +13,64 @@ public class Store {
     private Timestamp created_time;
 
     // Getters and Setters
-    public int getStoreId() { return storeId; }
-    public void setStoreId(int storeId) { this.storeId = storeId; }
+    public int getStoreId() {
+        return storeId;
+    }
 
-    public int getCookie() { return cookie; }
-    public void setCookie(int cookie) { this.cookie = cookie; }
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
+    }
 
-    public int getSeller() { return seller; }
-    public void setSeller(int seller) { this.seller = seller; }
+    public int getCookie() {
+        return cookie;
+    }
 
-    public int getPrice() { return price; }
-    public void setPrice(int price) { this.price = price; }
+    public void setCookie(int cookie) {
+        this.cookie = cookie;
+    }
 
-    public int getWeight() { return weight; }
-    public void setWeight(int weight) { this.weight = weight; }
+    public int getSeller() {
+        return seller;
+    }
 
-    public Date getDate() { return date; }
-    public void setDate(Date date) { this.date = date; }
+    public void setSeller(int seller) {
+        this.seller = seller;
+    }
 
-    public Timestamp getCreatedAt() { return created_time; }
-    public void setCreatedAt(Timestamp created_time) { this.created_time = created_time; }
+    public int getPrice() {
+        return price;
+    }
 
-    public static Store CreateStore(int storeId, int cookie, int seller, int price, int weight, Date date, Timestamp created_time){
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Timestamp getCreatedAt() {
+        return created_time;
+    }
+
+    public void setCreatedAt(Timestamp created_time) {
+        this.created_time = created_time;
+    }
+
+    public static Store CreateStore(int storeId, int cookie, int seller, int price, int weight, Date date,
+            Timestamp created_time) {
         Store store = new Store();
 
         store.setStoreId(storeId);
@@ -51,7 +84,7 @@ public class Store {
         return store;
     }
 
-    public static Store CreateStore(int cookie, int seller, int price, int weight, Date date, Timestamp created_time){
+    public static Store CreateStore(int cookie, int seller, int price, int weight, Date date, Timestamp created_time) {
         Store store = new Store();
         store.setCookie(cookie);
         store.setSeller(seller);

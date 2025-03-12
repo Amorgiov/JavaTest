@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Seller</title>
+  </head>
+  <body>
+    <h1>Edit Seller</h1>
+
+    <form
+      th:action="@{/sellers/{id}/edit(id=${seller.sellerId})}"
+      method="post"
+    >
+      <input
+        type="hidden"
+        id="sellerId"
+        name="sellerId"
+        th:value="${seller.sellerId}"
+        required
+      />
+
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        th:value="${seller.name}"
+        required
+      />
+      <br /><br />
+
+      <label for="surname">Surname:</label>
+      <input
+        type="text"
+        id="surname"
+        name="surname"
+        th:value="${seller.surname}"
+        required
+      />
+      <br /><br />
+
+      <label for="phone">Phone:</label>
+      <input
+        type="text"
+        id="phone"
+        name="phone"
+        th:value="${seller.phone}"
+        required
+      />
+      <br /><br />
+
+      <button type="submit">Update Seller</button>
+    </form>
+
+    <br />
+    <a th:href="@{/sellers}">
+      <button type="button">Back to List</button>
+    </a>
+  </body>
+</html>

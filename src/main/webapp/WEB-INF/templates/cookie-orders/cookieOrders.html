@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookie Order List</title>
+  </head>
+  <body>
+    <h1>Cookie Management</h1>
+    <nav>
+      <a th:href="@{/cookies}">Cookies</a> |
+      <a th:href="@{/sellers}">Sellers</a> |
+      <a th:href="@{/cookie-orders}">Cookie Orders</a> |
+      <a th:href="@{/stores}">Stores</a>
+    </nav>
+
+    <h2>Cookie Order List</h2>
+
+    <a th:href="@{/cookie-orders/create}">
+      <button type="button">Add New Cookie Order</button>
+    </a>
+    <br /><br />
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Store ID</th>
+          <th>Weight</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="cookieOrder : ${cookieOrders}">
+          <td th:text="${cookieOrder.cookieOrderId}"></td>
+          <td th:text="${cookieOrder.storeId}"></td>
+          <td th:text="${cookieOrder.weight}"></td>
+          <td>
+            <a
+              th:href="@{/cookie-orders/{id}/edit(id=${cookieOrder.cookieOrderId})}"
+            >
+              <button type="button">Edit</button>
+            </a>
+            <a
+              th:href="@{/cookie-orders/{id}/delete(id=${cookieOrder.cookieOrderId})}"
+              onclick="return confirm('Are you sure you want to delete this order?');"
+            >
+              <button type="button">Delete</button>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+      <tr th:if="${#lists.isEmpty(cookieOrders)}">
+        <td colspan="4">No cookie orders available.</td>
+      </tr>
+    </table>
+
+    <p>
+      <a th:href="@{/}">
+        <button type="button">Go to Cookie Guide</button>
+      </a>
+    </p>
+  </body>
+</html>

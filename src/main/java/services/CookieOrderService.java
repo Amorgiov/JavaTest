@@ -1,9 +1,6 @@
 package services;
 
 import models.CookieOrder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Service;
 import repositories.CookieOrderRepository;
 
 import java.util.List;
@@ -21,11 +18,19 @@ public class CookieOrderService {
                 CookieOrder.CreateCookieOrder(cookieOrder.getStoreId(), cookieOrder.getWeight()));
     }
 
-    public List<CookieOrder> getAll() { return cookieOrderRepository.getAll(); }
+    public List<CookieOrder> getAll() {
+        return cookieOrderRepository.getAll();
+    }
 
-    public CookieOrder getById(int id) { return cookieOrderRepository.getById(id); }
+    public CookieOrder getById(int id) {
+        return cookieOrderRepository.getById(id);
+    }
 
-    public void update(int id, CookieOrder cookieOrder) { cookieOrderRepository.update(id, cookieOrder); }
+    public void update(int id, CookieOrder cookieOrder) {
+        cookieOrderRepository.update(id, cookieOrder);
+    }
 
-    public void delete(int id) { cookieOrderRepository.delete(id); }
+    public void delete(int id) {
+        cookieOrderRepository.delete(id);
+    }
 }

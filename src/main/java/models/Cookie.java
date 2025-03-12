@@ -1,6 +1,5 @@
 package models;
 
-import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -15,15 +14,20 @@ public class Cookie {
     public int getCookieId() {
         return cookieId;
     }
-    public void setCookieId(int cookieId) { this.cookieId = cookieId; }
+
+    public void setCookieId(int cookieId) {
+        this.cookieId = cookieId;
+    }
+
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public static Cookie CreateCookie (int cookieId, String title){
+    public static Cookie CreateCookie(int cookieId, String title) {
         Cookie cookie = new Cookie();
 
         cookie.setCookieId(cookieId);
@@ -31,7 +35,8 @@ public class Cookie {
 
         return cookie;
     }
-    public static Cookie CreateCookie (String title){
+
+    public static Cookie CreateCookie(String title) {
         Cookie cookie = new Cookie();
         cookie.setTitle(title);
         return cookie;

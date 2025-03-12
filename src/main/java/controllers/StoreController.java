@@ -7,7 +7,6 @@ import services.StoreService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -46,7 +45,15 @@ public class StoreController {
 
     @PostMapping("/create")
     public String createStore(@ModelAttribute("store") Store store) {
-        storeService.insertStore(Store.CreateStore(store.getStoreId(), store.getCookie(), store.getSeller(), store.getPrice(), store.getWeight(), store.getDate(), new Timestamp(System.currentTimeMillis())));
+        storeService.insertStore(
+                Store.CreateStore(
+                        store.getStoreId(),
+                        store.getCookie(),
+                        store.getSeller(),
+                        store.getPrice(),
+                        store.getWeight(),
+                        store.getDate(),
+                        new Timestamp(System.currentTimeMillis())));
         return "redirect:/stores";
     }
 
@@ -59,7 +66,15 @@ public class StoreController {
 
     @PostMapping("/{id}/edit")
     public String editStore(@ModelAttribute("store") Store store) {
-        storeService.update(store.getStoreId(), Store.CreateStore(store.getCookie(), store.getSeller(), store.getPrice(), store.getWeight(), store.getDate(), new Timestamp(System.currentTimeMillis())));
+        storeService.update(
+                store.getStoreId(),
+                Store.CreateStore(
+                        store.getCookie(),
+                        store.getSeller(),
+                        store.getPrice(),
+                        store.getWeight(),
+                        store.getDate(),
+                        new Timestamp(System.currentTimeMillis())));
         return "redirect:/stores";
     }
 

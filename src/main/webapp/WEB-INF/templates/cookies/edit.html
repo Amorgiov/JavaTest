@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Edit Cookie</title>
+  </head>
+  <body>
+    <h1>Edit Cookie</h1>
+    <form
+      th:action="@{/cookies/{id}/edit(id=${cookieItem.cookieId})}"
+      method="post"
+      th:object="${cookieItem}"
+    >
+      <label th:for="title">Title:</label>
+      <input type="text" th:field="*{title}" required />
+      <span
+        th:if="${#fields.hasErrors('title')}"
+        th:errors="*{title}"
+        class="error"
+      ></span>
+      <button type="submit">Update</button>
+    </form>
+    <br />
+    <a th:href="@{/cookies}">Back to List</a>
+  </body>
+</html>

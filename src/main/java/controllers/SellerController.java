@@ -3,13 +3,9 @@ package controllers;
 import models.Seller;
 import org.springframework.stereotype.Controller;
 import services.SellerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 @RequestMapping("/sellers")
@@ -35,10 +31,10 @@ public class SellerController {
         Seller seller = sellerService.getById(id);
         if (seller == null) {
             model.addAttribute("error", "Seller not found");
-            return "error";  // Страница ошибки, если продавец не найден
+            return "error"; // Страница ошибки, если продавец не найден
         }
         model.addAttribute("seller", seller);
-        return "sellers/detail";  // Страница с деталями продавца
+        return "sellers/detail"; // Страница с деталями продавца
     }
 
     // GET: /sellers/create
@@ -49,9 +45,8 @@ public class SellerController {
 
     @PostMapping("/create")
     public String createSeller(@ModelAttribute("seller") Seller seller) {
-
         sellerService.insertSeller(Seller.CreateSeller(seller.getName(), seller.getSurname(), seller.getPhone()));
-        return "redirect:/sellers";  // Возвращаем на страницу создания для отображения сообщения
+        return "redirect:/sellers"; // Возвращаем на страницу создания для отображения сообщения
     }
 
     // GET: /sellers/{id}/edit
@@ -60,10 +55,10 @@ public class SellerController {
         Seller seller = sellerService.getById(id);
         if (seller == null) {
             model.addAttribute("error", "Seller not found");
-            return "error";  // Страница ошибки, если продавец не найден
+            return "error"; // Страница ошибки, если продавец не найден
         }
         model.addAttribute("seller", seller);
-        return "sellers/edit";  // Страница для редактирования
+        return "sellers/edit"; // Страница для редактирования
     }
 
     // POST: /sellers/{id}/edit
@@ -71,13 +66,13 @@ public class SellerController {
     public String editSeller(@ModelAttribute("seller") Seller seller) {
         Seller updatedSeller = Seller.CreateSeller(seller.getName(), seller.getSurname(), seller.getPhone());
         sellerService.update(seller.getSellerId(), updatedSeller);
-        return "redirect:/sellers";  // Перенаправление на список продавцов после обновления
+        return "redirect:/sellers"; // Перенаправление на список продавцов после обновления
     }
 
     // GET: /sellers/{id}/delete
     @GetMapping("/{id}/delete")
     public String deleteSeller(@PathVariable("id") int id) {
         sellerService.delete(id);
-        return "redirect:/sellers";  // Перенаправление на список продавцов после удаления
+        return "redirect:/sellers"; // Перенаправление на список продавцов после удаления
     }
 }

@@ -1,8 +1,5 @@
 package models;
 
-import org.springframework.stereotype.Component;
-
-
 public class CookieOrder {
     private int cookieOrderId;
 
@@ -11,8 +8,13 @@ public class CookieOrder {
     private int weight;
 
     // Getters and Setters
-    public int getCookieOrderId() { return cookieOrderId; }
-    public void setCookieOrderId(int cookieOrderId) { this.cookieOrderId = cookieOrderId; }
+    public int getCookieOrderId() {
+        return cookieOrderId;
+    }
+
+    public void setCookieOrderId(int cookieOrderId) {
+        this.cookieOrderId = cookieOrderId;
+    }
 
     public int getStoreId() {
         return storeId;
@@ -30,7 +32,7 @@ public class CookieOrder {
         this.weight = weight;
     }
 
-    public static CookieOrder CreateCookieOrder (int cookieOrderId, int store_id, int weight) {
+    public static CookieOrder CreateCookieOrder(int cookieOrderId, int store_id, int weight) {
         CookieOrder cookieOrder = new CookieOrder();
 
         cookieOrder.setCookieOrderId(cookieOrderId);
@@ -39,7 +41,8 @@ public class CookieOrder {
 
         return cookieOrder;
     }
-    public static CookieOrder CreateCookieOrder (int store_id, int weight) {
+
+    public static CookieOrder CreateCookieOrder(int store_id, int weight) {
         CookieOrder cookieOrder = new CookieOrder();
 
         cookieOrder.setStoreId(store_id);

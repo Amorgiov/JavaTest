@@ -24,7 +24,7 @@ public class CookieController {
     @GetMapping
     public String getAllCookies(Model model) {
         List<Cookie> cookies = cookieService.getAll();
-        cookies.forEach(c -> System.out.println( c.getCookieId() + " " + c.getTitle()));
+        cookies.forEach(c -> System.out.println(c.getCookieId() + " " + c.getTitle()));
         model.addAttribute("cookies", cookies);
         return "cookies/cookies";
     }
@@ -52,12 +52,10 @@ public class CookieController {
     @PostMapping("/create")
     public String createCookie(@Valid @ModelAttribute("cookie") Cookie cookie, BindingResult result) {
         if (result.hasErrors()) {
-            System.out.println(result.hasErrors() + " " + result);
             return "cookies/create"; // возвращаем форму с ошибками
         }
 
         cookieService.insertCookie(Cookie.CreateCookie(cookie.getTitle()));
-
         return "redirect:/cookies";
     }
 
@@ -77,9 +75,10 @@ public class CookieController {
     @PostMapping("/{id}/edit")
     public String editCookie(@Valid @ModelAttribute("cookieItem") Cookie cookieItem, BindingResult result) {
         if (result.hasErrors()) {
-            return "cookies/edit";  // возвращаем форму с ошибками
+            return "cookies/edit"; // возвращаем форму с ошибками
         }
-        cookieService.update(cookieItem.getCookieId(), Cookie.CreateCookie(cookieItem.getTitle()));
+        Cookie updatedCookie = Cookie.CreateCookie(cookieItem.getTitle());
+        cookieService.update(cookieItem.getCookieId(), updatedCookie);
         return "redirect:/cookies";
     }
 
